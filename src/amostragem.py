@@ -3,15 +3,18 @@ import random
 import numpy as np
 from sklearn.model_selection import StratifiedShuffleSplit
 
+def amostragem_aleatoria_simples(dataset, qtd_amostra):
+    """
+    Extrai uma amostra aleatória de um dataframe. O random_state grante a
+        reprodutibilidade
+    input:
+        dataset: dataframe
+        qtd_amostra: quantidade de registros da amostra
+    output: 
+        amostra com de dataframe
+    """
+    return dataset.sample(n = qtd_amostra, random_state=314)
 
-# Criar uma função para obter uma amostra aleatória simples
-def amostra_aleatoria_simples(dataset, amostra):
-    """
-    Amostra aleatória, sem repetição, com parâmetro replace-false,
-    em sample. Para obter a mesma amostra, a seed, que aqui é o random_state,
-    deve ser igual a um número.
-    """
-    return dataset.sample(n = amostra, random_state=1)
 
 
 def amostragem_sistematica(dataset, amostras):

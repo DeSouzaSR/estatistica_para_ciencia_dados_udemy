@@ -12,14 +12,26 @@ def amostragem_aleatoria_simples(dataset, qtd_amostra):
         qtd_amostra: quantidade de registros da amostra
     output: 
         amostra com de dataframe
+    obs:
+        random_state = 314 é o seed, para preprodutibilidade
     """
     return dataset.sample(n = qtd_amostra, random_state=314)
 
 
 
-def amostragem_sistematica(dataset, amostras):
-    intervalo = len(dataset) // amostras
-    random.seed(1)
+def amostragem_sistematica(dataset, qtd_amostras):
+    """
+    Extrai uma amostra sistematica de um dataframe.
+    input:
+        dataset: dataframe
+        qtd_amostra: quantidade de registros da amostra
+    output: 
+        amostra com de dataframe
+    obs:
+        random_state = 314 é o seed, para preprodutibilidade
+    """
+    intervalo = len(dataset) // qtd_amostras
+    random.seed(314)
     inicio = random.randint(0, intervalo)
     indices = np.arange(inicio, len(dataset), step = intervalo)
     amostra_sistematica = dataset.iloc[indices]

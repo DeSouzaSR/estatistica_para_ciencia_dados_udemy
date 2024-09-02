@@ -31,7 +31,7 @@ def amostragem_sistematica(dataset, qtd_amostras):
         random_state = 314 é o seed, para preprodutibilidade
     """
     intervalo = len(dataset) // qtd_amostras
-    random.seed(314)
+    random.seed(1)
     inicio = random.randint(0, intervalo)
     indices = np.arange(inicio, len(dataset), step = intervalo)
     amostra_sistematica = dataset.iloc[indices]

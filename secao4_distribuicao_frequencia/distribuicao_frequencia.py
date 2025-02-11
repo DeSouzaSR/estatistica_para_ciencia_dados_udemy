@@ -1,0 +1,174 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+#%%
+# Importar módulos
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+import pandas as pd
+
+print("Distribuição de frequências")
+
+#%%
+# Preparando dados
+print("Preparação dos dados")
+dados = np.array([160, 165, 167, 164, 160, 166, 160, 161, 150, 152, 173, 160, 155,
+                  164, 168, 162, 161, 168, 163, 156, 155, 169, 151, 170, 164,
+                  155, 152, 163, 160, 155, 157, 156, 158, 158, 161, 154, 161, 156, 172, 153])
+
+print("Dados não ordenados: \n", dados)
+#%%
+## Ordenação
+print("Ordenação dos dados")
+dados = np.sort(dados)
+print("Dados ordenados: \n", dados)
+
+#%%
+# Valores mínimos e máximos
+print("Valores mínimo e máximo")
+minimo = dados.min()
+maximo = dados.max()
+print("Mínimo: ", minimo)
+print("Máximo: ", maximo)
+
+#%%
+# Número de classes
+print("Número de classes")
+# Fórmula de Sturges
+# i = 1 + 3.3*log10(n)
+
+n = len(dados)
+k = 1 + 3.3 * np.log10(n)
+k = int(k.round()) # Arredondamento
+print("Número de classes: ", k)
+
+#%%
+# Amplitude do intervalo
+print("Amplitude do intervalo")
+# h = AA / i
+# AA = Xmax - Xmin
+# Arredondar o h para cima, com ceil do numpy
+
+AA = maximo - minimo
+h = AA / k
+h = np.ceil(h) # Arredondamento
+print("Amplitude do intervalo: ", h)
+
+#%%
+# Construção da distribuição de frequência
+print("Construção da distribuição de frequência")
+
+intervalos = np.arange(minimo, maximo + h, step = h)
+print("Intervalos: ", intervalos)
+
+intervalo1, intervalo2, intervalo3, intervalo4, intervalo5, intervalo6 = 0, 0, 0, 0, 0, 0
+for i in range(n):
+    if dados[i] >= intervalos[0] and dados[i] < intervalos[1]:
+        intervalo1 += 1
+    elif dados[i] >= intervalos[1] and dados[i] < intervalos[2]:
+        intervalo2 += 1
+    elif dados[i] >= intervalos[2] and dados[i] < intervalos[3]:
+        intervalo3 += 1
+    elif dados[i] >= intervalos[3] and dados[i] < intervalos[4]:
+        intervalo4 += 1
+    elif dados[i] >= intervalos[4] and dados[i] < intervalos[5]:
+        intervalo5 += 1
+    elif dados[i] >= intervalos[5] and dados[i] < intervalos[6]:
+        intervalo6 += 1
+
+# Colocar estes valores numa lista
+lista_intervalos = np.array([intervalo1, intervalo2, intervalo3, intervalo4, intervalo5, intervalo6])
+print("Lista de intervalos: ", lista_intervalos)
+
+# Criar uma lista com os intervalos de classes
+lista_classes = []
+for i in range(len(lista_intervalos)):
+    lista_classes.append(str(intervalos[i]) + '-' + str(intervalos[i + 1]))
+print("Classes: ", lista_classes)
+
+# Plotar gráfico de barras com as frequências
+plt.figure(figsize=(10, 6))
+plt.bar(lista_classes, lista_intervalos)
+plt.title("Distribuição de frequências")
+plt.xlabel("Classes")
+plt.ylabel("Frequência")
+plt.show()
+
+#%%
+# Distribuição de frequência e histograma com numpy e matplotlib
+# Recriando as variáveis original dados
+dados = np.array([160, 165, 167, 164, 160, 166, 160, 161, 150, 152, 173, 160, 155,
+                    164, 168, 162, 161, 168, 163, 156, 155, 169, 151, 170, 164,
+                    155, 152, 163, 160, 155, 157, 156, 158, 158, 161, 154, 161, 156, 172, 153])
+
+frequencia, classes = np.histogram(dados)
+print("Frequência: ", frequencia)
+print("Classes: ", classes)
+plt.hist(dados, bins = classes)
+plt.title("Distribuição de frequências")
+plt.xlabel("Classes")
+plt.ylabel("Frequência")
+plt.show()
+
+# %%
+# plotar o gráfico com o seaborn e matplotlib
+plt.figure(figsize=(10, 6))
+sns.histplot(dados, bins=6, kde=True)
+plt.title("Histograma com seaborn")
+plt.xlabel("Classes")
+plt.ylabel("Frequência")
+plt.show()
+
+# %%
+# plotar o gráfico com o seaborn e matplotlib
+plt.figure(figsize=(10, 6))
+sns.histplot(dados, bins='sqrt', kde=True)
+plt.title("Histograma com seaborn")
+plt.xlabel("Classes")
+plt.ylabel("Frequência")
+plt.show()
+
+#%%
+# Distribuição de frequência e histograma com pandas e seaborn
+
+# Criar um DataFrame com os dados
+dados = np.array([160, 165, 167, 164, 160, 166, 160, 161, 150, 152, 173, 160, 155,
+                    164, 168, 162, 161, 168, 163, 156, 155, 169, 151, 170, 164,
+                    155, 152, 163, 160, 155, 157, 156, 158, 158, 161, 154, 161, 156, 172, 153])
+
+# Criar um DataFrame com os dados
+dataset = pd.DataFrame(dados, columns=["Altura"])
+
+dataset.plot.hist()
+
+#%% 
+# usando seaborn
+
+plt.figure(figsize=(10, 6))
+sns.displot(dataset, bins=6, kde=True)
+
+# %%
+# Exercício - idade census.csv
+# Importar dados
+dados = pd.read_csv("../data/raw_data/census.csv")
+# %%
+# Visualizar os dados
+print("Visualização dos dados")
+print(dados.head())
+
+# %%
+# aplicar a distribuição de frequência utilizando o atributo age da base de dados do censo
+
+plt.figure(figsize=(10, 6))
+sns.histplot(dados['age'], bins = 20, kde=True)
+plt.title("Histograma com seaborn")
+plt.xlabel("Classes")
+plt.ylabel("Frequência")
+plt.show()
+# %%
+# faixa personalizada
+plt.figure(figsize=(10, 6))
+sns.histplot(dados['age'], bins = [0, 17, 25, 40, 60, 90], kde=True)
+plt.show()
+# %%

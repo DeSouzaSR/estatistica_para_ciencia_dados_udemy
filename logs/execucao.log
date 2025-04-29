@@ -1,0 +1,23 @@
+2025-04-29 16:22:12,300 - INFO - Início da execução
+2025-04-29 16:22:12,350 - INFO - Arquivo .\data\raw_data\census.csv carregado com sucesso.
+2025-04-29 16:22:12,385 - INFO - DataFrame carregado com 32561 linhas e 15 colunas.
+2025-04-29 16:22:12,385 - INFO - Primeiras 5 linhas:
+   age          workclass  final-weight   education  education-num       marital-status          occupation    relationship    race      sex  capital-gain  capital-loos  hour-per-week  native-country  income
+0   39          State-gov         77516   Bachelors             13        Never-married        Adm-clerical   Not-in-family   White     Male          2174             0             40   United-States   <=50K
+1   50   Self-emp-not-inc         83311   Bachelors             13   Married-civ-spouse     Exec-managerial         Husband   White     Male             0             0             13   United-States   <=50K
+2   38            Private        215646     HS-grad              9             Divorced   Handlers-cleaners   Not-in-family   White     Male             0             0             40   United-States   <=50K
+3   53            Private        234721        11th              7   Married-civ-spouse   Handlers-cleaners         Husband   Black     Male             0             0             40   United-States   <=50K
+4   28            Private        338409   Bachelors             13   Married-civ-spouse      Prof-specialty            Wife   Black   Female             0             0             40            Cuba   <=50K
+2025-04-29 16:22:12,385 - INFO - Analisando a coluna: age
+2025-04-29 16:22:12,708 - INFO - Gráfico salvo como logs/distribuicao_age.png
+2025-04-29 16:22:12,708 - INFO - Analisando a coluna: final-weight
+2025-04-29 16:22:13,110 - INFO - Gráfico salvo como logs/distribuicao_final-weight.png
+2025-04-29 16:22:13,110 - INFO - Analisando a coluna: education-num
+2025-04-29 16:22:13,354 - INFO - Gráfico salvo como logs/distribuicao_education-num.png
+2025-04-29 16:22:13,355 - INFO - Analisando a coluna: capital-gain
+2025-04-29 16:22:13,676 - INFO - Gráfico salvo como logs/distribuicao_capital-gain.png
+2025-04-29 16:22:13,676 - INFO - Analisando a coluna: capital-loos
+2025-04-29 16:22:13,953 - INFO - Gráfico salvo como logs/distribuicao_capital-loos.png
+2025-04-29 16:22:13,953 - INFO - Analisando a coluna: hour-per-week
+2025-04-29 16:22:14,352 - INFO - Gráfico salvo como logs/distribuicao_hour-per-week.png
+2025-04-29 16:22:14,352 - INFO - Fim da execução
